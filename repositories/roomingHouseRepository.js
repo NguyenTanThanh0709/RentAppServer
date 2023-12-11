@@ -89,22 +89,19 @@ class RoomingHouseRepository {
             path: 'amenities',
           })
           .populate({
+            path: 'typehouse',
+          })
+          .populate({
             path: 'serviceCharge.serviceChargeId',
              model: 'ServiceCharge',
           })
           .populate({
-            path: 'typehouse',
-          })
-          .populate({
             path: 'address',
           })
-          .populate({
-            path: 'roominghousecomplex',  // Populate the roominghousecomplex field
-            model: 'RoomingHouseComplex', // Model to populate
-          })
+          
           .populate({
             path: 'areaInformation.areaInformationID',
-               model: 'AreaInformation',
+             model: 'AreaInformation',
           })
           .populate({
             path: 'owner',
@@ -131,10 +128,7 @@ class RoomingHouseRepository {
             .populate({
               path: 'address',
             })
-            .populate({
-              path: 'roominghousecomplex',  // Populate the roominghousecomplex field
-              model: 'RoomingHouseComplex', // Model to populate
-            })
+            
             .populate({
               path: 'areaInformation.areaInformationID',
                model: 'AreaInformation',
@@ -191,27 +185,23 @@ class RoomingHouseRepository {
             path: 'amenities',
           })
           .populate({
-            path: 'serviceCharge.serviceChargeId',
-            model: 'ServiceCharge',
-          })
-          .populate({
-            path: 'roominghousecomplex',  // Populate the roominghousecomplex field
-            model: 'RoomingHouseComplex', // Model to populate
-          })
-          .populate({
             path: 'typehouse',
           })
           .populate({
-            path: 'areaInformation.areaInformationID',
-               model: 'AreaInformation',
+            path: 'serviceCharge.serviceChargeId',
+             model: 'ServiceCharge',
           })
           .populate({
             path: 'address',
           })
+          
+          .populate({
+            path: 'areaInformation.areaInformationID',
+             model: 'AreaInformation',
+          })
           .populate({
             path: 'owner',
-          })
-          ;
+          });
           
           return roomingHouse;
         } catch (error) {

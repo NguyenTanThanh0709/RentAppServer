@@ -31,10 +31,7 @@ const getAreainformationById = async (req, res) => {
   try {
     const areainformation = await areaInformationRepository.getAreainformationById(areainformationId);
 
-    res.status(HttpStatusCode.OK).json({
-      message: 'Areainformation found successfully',
-      data: areainformation,
-    });
+    res.status(HttpStatusCode.OK).json(areainformation);
   } catch (exception) {
     res.status(HttpStatusCode.NOT_FOUND).json({
       message: exception.toString(),
@@ -46,10 +43,7 @@ const getAreainformationList = async (req, res) => {
   try {
     const areainformationList = await areaInformationRepository.getAreainformationList();
 
-    res.status(HttpStatusCode.OK).json({
-      message: 'List of area information retrieved successfully',
-      data: areainformationList,
-    });
+    res.status(HttpStatusCode.OK).json(areainformationList);
   } catch (exception) {
     res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
       message: exception.toString(),

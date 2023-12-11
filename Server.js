@@ -2,6 +2,7 @@ import express from 'express'
 import * as dotenv from 'dotenv'
 import connect from './database/database.js'
 import checkToken from './authentication/auth.js'
+import cors from 'cors';
 import {
     roomingHouseRouter,
     tenantRouter,
@@ -27,6 +28,7 @@ dotenv.config()//must have
 const app = express()
 app.use(checkToken)
 app.use(express.json())
+app.use(cors({ origin: '*' }));
 const port = process.env.PORT || 3000
 
 app.use('/bill', billRouter)
@@ -45,6 +47,7 @@ app.use('/lichhen', viewingAppointmentRouter)
 app.use('/comment', commentReviewRouter)
 app.use('/issue', issueRouter)
 app.use('/leasecontract', leaseContractRouter)
+
 app.get('/', (req, res) =>{
     res.send('response from root router, haha 1111')
 })

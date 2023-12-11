@@ -8,10 +8,7 @@ async function getListByOwnerId(req, res) {
 
   try {
     const roomingHouses = await RoomingHouseRepository.getByOwnerId(ownerId);
-    res.json({
-      message: 'List of rooming houses by owner retrieved successfully',
-      data: roomingHouses,
-    });
+    res.json(roomingHouses);
   } catch (exception) {
     res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
       message: exception.toString(),
@@ -24,10 +21,7 @@ async function getListByRoomingHouseComplexId(req, res) {
 
   try {
     const roomingHouses = await RoomingHouseRepository.getListByRoomingHouseComplexId(roomingHouseComplexId);
-    res.json({
-      message: 'List of rooming houses by rooming house complex retrieved successfully',
-      data: roomingHouses,
-    });
+    res.json(roomingHouses);
   } catch (exception) {
     res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
       message: exception.toString(),
@@ -69,10 +63,7 @@ async function getPhongTro(req, res) {
         message: 'Rooming house not found',
       });
     }
-    res.json({
-      message: 'Rooming house retrieved successfully',
-      data: roomingHouse,
-    });
+    res.json(roomingHouse);
   } catch (exception) {
     res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
       message: exception.toString(),

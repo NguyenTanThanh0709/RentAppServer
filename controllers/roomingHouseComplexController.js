@@ -32,10 +32,7 @@ const getRoomingHouseComplexById = async (req, res) => {
   try {
     const roomingHouseComplex = await RoomingHouseComplexRepository.getById(roomingHouseComplexId);
 
-    res.status(HttpStatusCode.OK).json({
-      message: 'RoomingHouseComplex found successfully',
-      data: roomingHouseComplex,
-    });
+    res.status(HttpStatusCode.OK).json(roomingHouseComplex);
   } catch (exception) {
     res.status(HttpStatusCode.NOT_FOUND).json({
       message: exception.toString(),
@@ -113,10 +110,8 @@ const deleteRoomingHouseFromComplex = async (req, res) => {
   
     try {
       const roomingHouseComplex = await RoomingHouseComplexRepository.getByOwnerId(ownerId);
-      res.json({
-        message: 'RoomingHouseComplex found by owner ID successfully',
-        data: roomingHouseComplex,
-      });
+      console.log(roomingHouseComplex);
+      res.json(roomingHouseComplex);
     } catch (exception) {
       res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
         message: exception.toString(),

@@ -9,4 +9,8 @@ router.post('/login',
     landlordController.login
 )
 router.post('/register', landlordController.register)
+
+router.get('/common', (req, res) => {
+    res.send('Hello, World!');
+});
 export default router

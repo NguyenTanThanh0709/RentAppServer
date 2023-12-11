@@ -22,7 +22,7 @@ export default mongoose.model('RoomingHouseComplex',
           areaInformation: [{
             areaInformationID: {
               type: Schema.Types.ObjectId,
-              ref: 'Areainformation',
+              ref: 'AreaInformation',
               required: false,
             },
             distance: {

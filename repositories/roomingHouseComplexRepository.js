@@ -65,15 +65,17 @@ class RoomingHouseComplexRepository {
   async getList() {
     try {
       const roomingHouseComplexes = await RoomingHouseComplex.find()
-        .populate({
-          path: 'listroom',
-        })
-        .populate({
-          path: 'owner',
-        })
-        .populate({
-          path: 'areaInformation.areaInformationID',
-         model: 'AreaInformation',
+      .populate({
+        path: 'listroom',
+        model: 'RoomingHouse',
+      })
+      .populate({
+        path: 'owner',
+        model: 'Landlord',
+      })
+      .populate({
+            path: 'areaInformation.areaInformationID',
+             model: 'AreaInformation',
   });
 
       return roomingHouseComplexes;
@@ -85,15 +87,17 @@ class RoomingHouseComplexRepository {
 
   async getByOwnerId(ownerId) {
     try {
-      const roomingHouseComplex = await RoomingHouseComplex.findOne({ owner: ownerId })
+      const roomingHouseComplex = await RoomingHouseComplex.find({ owner: ownerId })
       .populate({
         path: 'listroom',
+        model: 'RoomingHouse',
       })
       .populate({
         path: 'owner',
+        model: 'Landlord',
       })
       .populate({
-              path: 'areaInformation.areaInformationID',
+            path: 'areaInformation.areaInformationID',
              model: 'AreaInformation',
       });
 
@@ -109,15 +113,17 @@ class RoomingHouseComplexRepository {
   async getById(id) {
     try {
       const roomingHouseComplex = await RoomingHouseComplex.findById(id)
-        .populate({
-          path: 'listroom',
-        })
-        .populate({
-          path: 'owner',
-        })
-        .populate({
-                path: 'areaInformation.areaInformationID',
-               model: 'AreaInformation',
+      .populate({
+        path: 'listroom',
+        model: 'RoomingHouse',
+      })
+      .populate({
+        path: 'owner',
+        model: 'Landlord',
+      })
+      .populate({
+            path: 'areaInformation.areaInformationID',
+             model: 'AreaInformation',
         });
 
       return roomingHouseComplex;

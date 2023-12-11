@@ -32,10 +32,7 @@ const addTypeHouse = async (req, res) => {
     try {
       const amenity = await typeHouseRepository.getnewTypeHouseyById(typehouseid );
   
-      res.status(HttpStatusCode.OK).json({
-        message: 'Amenity found successfully',
-        data: amenity,
-      });
+      res.status(HttpStatusCode.OK).json(amenity);
     } catch (exception) {
       res.status(HttpStatusCode.NOT_FOUND).json({
         message: exception.toString(),
@@ -47,10 +44,7 @@ const addTypeHouse = async (req, res) => {
     try {
       const typeHousesList = await typeHouseRepository.getTypeHousesList();
   
-      res.status(HttpStatusCode.OK).json({
-        message: 'List of TypeHouses retrieved successfully',
-        data: typeHousesList,
-      });
+      res.status(HttpStatusCode.OK).json(typeHousesList);
     } catch (exception) {
       res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
         message: exception.toString(),

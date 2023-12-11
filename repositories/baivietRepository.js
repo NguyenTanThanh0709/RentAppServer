@@ -12,7 +12,32 @@ class baivietRepository {
     
     async getAllPosts() {
         try {
-          return await Post_.find().populate('user room');
+          return await Post_.find()
+          .populate({
+            path: 'room',
+             model: 'RoomingHouse',
+             populate: [
+              {
+                path: 'amenities',
+              },
+              {
+                path: 'typehouse',
+            },{
+              path: 'owner',
+          },
+            {
+              path: 'address',
+          },
+              {
+                path: 'serviceCharge.serviceChargeId',
+                model: 'ServiceCharge',
+              },
+              {
+                path: 'areaInformation.areaInformationID',
+                model: 'AreaInformation',
+              },
+          ],
+          });
         } catch (error) {
           throw error;
         }
@@ -20,7 +45,32 @@ class baivietRepository {
     
     async getPostById(postId) {
         try {
-          return await Post_.findById(postId).populate('user room');
+          return await Post_.findById(postId)
+          .populate({
+            path: 'room',
+             model: 'RoomingHouse',
+             populate: [
+              {
+                path: 'amenities',
+              },
+              {
+                path: 'typehouse',
+            },{
+              path: 'owner',
+          },
+            {
+              path: 'address',
+          },
+              {
+                path: 'serviceCharge.serviceChargeId',
+                model: 'ServiceCharge',
+              },
+              {
+                path: 'areaInformation.areaInformationID',
+                model: 'AreaInformation',
+              },
+          ],
+          });
         } catch (error) {
           throw error;
         }
@@ -28,7 +78,32 @@ class baivietRepository {
     
     async updatePost(postId, newData) {
         try {
-          return await Post_.findByIdAndUpdate(postId, newData, { new: true }).populate('user room');
+          return await Post_.findByIdAndUpdate(postId, newData, { new: true })
+          .populate({
+            path: 'room',
+             model: 'RoomingHouse',
+             populate: [
+              {
+                path: 'amenities',
+              },
+              {
+                path: 'typehouse',
+            },{
+              path: 'owner',
+          },
+            {
+              path: 'address',
+          },
+              {
+                path: 'serviceCharge.serviceChargeId',
+                model: 'ServiceCharge',
+              },
+              {
+                path: 'areaInformation.areaInformationID',
+                model: 'AreaInformation',
+              },
+          ],
+          });
         } catch (error) {
           throw error;
         }
@@ -44,7 +119,32 @@ class baivietRepository {
 
     async getAllPostsByUser(userId) {
         try {
-          return await Post_.find({ user: userId }).populate('user room');
+          return await Post_.find({ user: userId })
+          .populate({
+            path: 'room',
+             model: 'RoomingHouse',
+             populate: [
+              {
+                path: 'amenities',
+              },
+              {
+                path: 'typehouse',
+            },{
+              path: 'owner',
+          },
+            {
+              path: 'address',
+          },
+              {
+                path: 'serviceCharge.serviceChargeId',
+                model: 'ServiceCharge',
+              },
+              {
+                path: 'areaInformation.areaInformationID',
+                model: 'AreaInformation',
+              },
+          ],
+          });
         } catch (error) {
           throw error;
         }
@@ -52,7 +152,32 @@ class baivietRepository {
     
     async getAllPostsByRoomingHouse(roomingHouseId) {
         try {
-          return await Post_.find({ 'room': { $in: [roomingHouseId] } }).populate('user room');
+          return await Post_.find({ 'room': { $in: [roomingHouseId] } })
+          .populate({
+            path: 'room',
+             model: 'RoomingHouse',
+             populate: [
+              {
+                path: 'amenities',
+              },
+              {
+                path: 'typehouse',
+            },{
+              path: 'owner',
+          },
+            {
+              path: 'address',
+          },
+              {
+                path: 'serviceCharge.serviceChargeId',
+                model: 'ServiceCharge',
+              },
+              {
+                path: 'areaInformation.areaInformationID',
+                model: 'AreaInformation',
+              },
+          ],
+          });
         } catch (error) {
           throw error;
         }

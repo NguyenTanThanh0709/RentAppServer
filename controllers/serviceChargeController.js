@@ -32,10 +32,7 @@ const getServiceChargeById = async (req, res) => {
   try {
     const serviceCharge = await serviceChargeRepository.getServiceChargeById(serviceChargeId);
 
-    res.status(HttpStatusCode.OK).json({
-      message: 'ServiceCharge found successfully',
-      data: serviceCharge,
-    });
+    res.status(HttpStatusCode.OK).json(serviceCharge);
   } catch (exception) {
     res.status(HttpStatusCode.NOT_FOUND).json({
       message: exception.toString(),
@@ -47,10 +44,7 @@ const getServiceChargeList = async (req, res) => {
   try {
     const serviceChargeList = await serviceChargeRepository.getServiceChargeList();
 
-    res.status(HttpStatusCode.OK).json({
-      message: 'List of service charges retrieved successfully',
-      data: serviceChargeList,
-    });
+    res.status(HttpStatusCode.OK).json(serviceChargeList);
   } catch (exception) {
     res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
       message: exception.toString(),

@@ -7,7 +7,7 @@ export default function checkToken(req, res, next) {
         || req.url.toLowerCase().trim() == '/tenant/register'.toLowerCase().trim()
         || req.url.toLowerCase().trim() == '/landlord/login'.toLowerCase().trim()
         || req.url.toLowerCase().trim() == '/landlord/register'.toLowerCase().trim()
-        || req.url.toLowerCase().trim() == '/common'.toLowerCase().trim()
+        || req.url.toLowerCase().trim() == '/landlord/common'.toLowerCase().trim()
         ) {
             next()
         return
