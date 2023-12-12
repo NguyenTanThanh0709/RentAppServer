@@ -8,7 +8,6 @@ import Landlord from "./Landlord.js"
 import Tenant from "./Tenant.js"
 import Issue from "./Issue.js"
 import Notification from "./Notification.js"
-import MonthlyRent from "./MonthlyRent.js"
 import Payment from "./Payment.js"
 import TypeHouse from "./TypeHouse.js"
 import ServiceCharge from "./serviceCharge.js"
@@ -27,7 +26,6 @@ export {
     ViewingAppointment,
     Issue,
     Notification,
-    MonthlyRent,
     Payment,
     ServiceCharge,
     areainformation

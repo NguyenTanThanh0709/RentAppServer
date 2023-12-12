@@ -14,23 +14,10 @@ export default mongoose.model('Bill',
         description: {
             type: String,
             required: false,
-          },
+        },
         leaseContract: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'LeaseContract', // Replace with the actual name of your RoomingHouse model
         },
-        serviceCharge: [{
-          serviceChargeId: {
-            type: Schema.Types.ObjectId,
-            ref: 'ServiceCharge',
-            required: false,
-          },
-          countNumber: {
-            type: Number,
-            required: false,  
-          },
-          
-        }]
-
     })
 );

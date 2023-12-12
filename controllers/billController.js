@@ -65,10 +65,7 @@ const getBillsByLeaseContract = async (req, res) => {
     try {
       const billsByLeaseContract = await billRepository.getBillsByLeaseContract(leaseContractId);
 
-      res.status(HttpStatusCode.OK).json({
-        message: 'Bills retrieved successfully',
-        data: billsByLeaseContract,
-      });
+      res.status(HttpStatusCode.OK).json(billsByLeaseContract);
     } catch (exception) {
       res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
         message: exception.toString(),
@@ -76,8 +73,29 @@ const getBillsByLeaseContract = async (req, res) => {
     }
 };
 
+const getBillById = async (req, res) => {
+  const { billId } = req.params;
+  console.log(billId);
+
+  try {
+    const bill = await billRepository.getById(billId);
+
+    if (!bill) {
+      return res.status(HttpStatusCode.NOT_FOUND).json({ message: 'Bill not found' });
+    }
+
+    res.status(HttpStatusCode.OK).json(bill);
+  } catch (exception) {
+    res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
+      message: exception.toString(),
+    });
+  }
+};
+
+
 export default {
-    addBill,
-    updateBill,
-    getBillsByLeaseContract,
+  addBill,
+  updateBill,
+  getBillsByLeaseContract,
+  getBillById, // Add the new function here
 };

@@ -33,4 +33,6 @@ router.put(
 // Route to get bills by LeaseContract ID
 router.get('/list/:leaseContractId', billController.getBillsByLeaseContract);
 
+router.get('/one/:billId', billController.getBillById);
+
 export default router;
