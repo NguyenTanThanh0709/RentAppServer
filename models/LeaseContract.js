@@ -20,6 +20,7 @@ export default mongoose.model('LeaseContract',
             type: mongoose.Schema.Types.ObjectId,
             ref: 'RoomingHouse', // Replace with the actual name of your RoomingHouse model
         },
+
         create_date: {
             type: Date,
             required: true,
@@ -36,6 +37,7 @@ export default mongoose.model('LeaseContract',
             type: Date,
             required: true,
         },
+        
         rent_price: {
             type: Number,
             required: true,

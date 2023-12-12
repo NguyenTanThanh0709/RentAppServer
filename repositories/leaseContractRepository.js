@@ -1,6 +1,52 @@
 import LeaseContract from '../models/LeaseContract.js';
 
 class LeaseContractRepository {
+
+
+  async getById(leaseContractId) {
+    try {
+      const leaseContract = await LeaseContract.findById(leaseContractId)
+        .populate({
+          path: 'tenant',
+          model: 'Tenant',
+        })
+        .populate({
+          path: 'landlord',
+          model: 'Landlord',
+        })
+        .populate({
+          path: 'roomingHouse',
+          model: 'RoomingHouse',
+          populate: [
+            {
+              path: 'amenities',
+            },
+            {
+              path: 'typehouse',
+            },
+            {
+              path: 'owner',
+            },
+            {
+              path: 'address',
+            },
+            {
+              path: 'serviceCharge.serviceChargeId',
+              model: 'ServiceCharge',
+            },
+            {
+              path: 'areaInformation.areaInformationID',
+              model: 'AreaInformation',
+            },
+          ],
+        });
+
+      return leaseContract;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async add(leaseContractData) {
     try {
       const newLeaseContract = new LeaseContract(leaseContractData);
@@ -50,17 +96,38 @@ class LeaseContractRepository {
     try {
       const leaseContracts = await LeaseContract.find({ landlord: landlordId })
       .populate({
-          path: 'tenant',
-         model: 'Tenant',
-  })
-  .populate({
-          path: 'landlord',
-         model: 'Landlord',
-  })
-  .populate({
-          path: 'roomingHouse',
-         model: 'RoomingHouse',
-  })
+        path: 'tenant',
+       model: 'Tenant',
+})
+.populate({
+        path: 'landlord',
+       model: 'Landlord',
+})
+.populate({
+        path: 'roomingHouse',       
+       model: 'RoomingHouse',
+       populate: [
+        {
+          path: 'amenities',
+        },
+        {
+          path: 'typehouse',
+      },{
+        path: 'owner',
+    },
+      {
+        path: 'address',
+    },
+        {
+          path: 'serviceCharge.serviceChargeId',
+          model: 'ServiceCharge',
+        },
+        {
+          path: 'areaInformation.areaInformationID',
+          model: 'AreaInformation',
+        },
+    ],
+})
       ;
       return leaseContracts;
     } catch (error) {
@@ -80,8 +147,29 @@ class LeaseContractRepository {
          model: 'Landlord',
   })
   .populate({
-          path: 'roomingHouse',
+          path: 'roomingHouse',       
          model: 'RoomingHouse',
+         populate: [
+          {
+            path: 'amenities',
+          },
+          {
+            path: 'typehouse',
+        },{
+          path: 'owner',
+      },
+        {
+          path: 'address',
+      },
+          {
+            path: 'serviceCharge.serviceChargeId',
+            model: 'ServiceCharge',
+          },
+          {
+            path: 'areaInformation.areaInformationID',
+            model: 'AreaInformation',
+          },
+      ],
   })
       ;
       return leaseContracts;
@@ -89,6 +177,7 @@ class LeaseContractRepository {
       throw error;
     }
   }
+  
 }
 
 export default new LeaseContractRepository();

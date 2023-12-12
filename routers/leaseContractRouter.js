@@ -6,7 +6,6 @@ const router = express.Router();
 
 // Route: Create a new LeaseContract
 router.post('/', [
-  body('tenant').notEmpty().withMessage('Tenant ID is required'),
   body('landlord').notEmpty().withMessage('Landlord ID is required'),
   body('roomingHouse').notEmpty().withMessage('roomingHouse ID is required'),
   body('create_date').notEmpty().withMessage('Create date is required'),
@@ -53,5 +52,7 @@ router.get('/landlord/:landlordId', [
 router.get('/roominghouse/:roomingHouseId', [
   param('roomingHouseId').isMongoId().withMessage('Invalid RoomingHouse ID'),
 ], leaseContractController.getLeaseContractsByRoomingHouse);
+
+router.get('/:leaseContractId', leaseContractController.getLeaseContractById);
 
 export default router;
