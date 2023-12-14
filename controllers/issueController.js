@@ -86,15 +86,30 @@ const update = async (req, res) => {
     const { issueId, newStatus } = req.params;
 
     try {
-      const result = await issueRepository.updateStatus(issueId, newStatus);
+        let retries = 3;
+        let success = false;
+        while (retries > 0 && !success) {
+            try {
+                const result = await issueRepository.updateStatus(issueId, newStatus);
 
-      if (result.nModified > 0) {
-        return res.status(200).json('Trạng thái được cập nhật thành công.');
-      }
+                if (result.nModified > 0) {
+                    success = true;
+                    return res.status(200).send('Trạng thái được cập nhật thành công.');
+                }
+            } catch (error) {
+                // Log or handle the error if needed
+            }
+
+            retries--;
+            // Wait for a short duration before retrying
+            await new Promise(resolve => setTimeout(resolve, 500));
+        }
+
+        return res.status(500).send('Trạng thái được cập nhật không thành công.');
     } catch (error) {
-      return res.status(500).json('Trạng thái được cập nhật thành công.');
+        return res.status(500).send('Trạng thái được cập nhật không thành công.');
     }
-  }
+};
 
 export default {
     createIssue,
