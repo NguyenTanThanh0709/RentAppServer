@@ -8,12 +8,21 @@ export default mongoose.model('Issue',
             ref: 'Tenant', // Replace with the actual name of your Tenant model
             required: true,
         },
-        room: [{
+        owner: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Landlord', // Replace with the actual name of your Tenant model
+            required: true,
+        },
+        room: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'RoomingHouse', // Replace with the actual name of your RoomingHouse model
             required: true,
-        }],
+        },
         description: {
+            type: String,
+            required: true,
+        },
+        date: {
             type: String,
             required: true,
         },
@@ -24,4 +33,3 @@ export default mongoose.model('Issue',
         },
     })
 )
-

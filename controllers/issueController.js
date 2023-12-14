@@ -8,9 +8,9 @@ const createIssue = async (req, res) => {
         return res.status(HttpStatusCode.BAD_REQUEST).json({ errors: errors.array() });
     }
 
-    const { user, room, description, status } = req.body;
+    const { user,owner, room, description,date, status } = req.body;
     try {
-        const newIssue = await issueRepository.create({ user, room, description, status });
+        const newIssue = await issueRepository.create({ user,owner, room, description,date, status });
         res.status(HttpStatusCode.INSERT_OK).json({
             message: 'Issue created successfully',
             data: newIssue,
@@ -29,9 +29,9 @@ const updateIssue = async (req, res) => {
     }
 
     const { id } = req.params;
-    const { user, room, description, status } = req.body;
+    const { user,owner, room, description,date, status } = req.body;
     try {
-        const updatedIssue = await issueRepository.update(id, { user, room, description, status });
+        const updatedIssue = await issueRepository.update(id, { user,owner, room, description,date, status });
         res.status(HttpStatusCode.OK).json({
             message: 'Issue updated successfully',
             data: updatedIssue,
@@ -62,10 +62,7 @@ const getIssuesByRoom = async (req, res) => {
     const { roomId } = req.params;
     try {
         const issues = await issueRepository.getByIdRoom(roomId);
-        res.status(HttpStatusCode.OK).json({
-            message: 'List of issues retrieved successfully',
-            data: issues,
-        });
+        res.status(HttpStatusCode.OK).json(issues);
     } catch (exception) {
         res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
             message: exception.toString(),
@@ -73,9 +70,37 @@ const getIssuesByRoom = async (req, res) => {
     }
 };
 
+const getIssuesByRoom_ = async (req, res) => {
+    const { roomId } = req.params;
+    try {
+        const issues = await issueRepository.getByIdRoom_(roomId);
+        res.status(HttpStatusCode.OK).json(issues);
+    } catch (exception) {
+        res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
+            message: exception.toString(),
+        });
+    }
+};
+
+const update = async (req, res) => {
+    const { issueId, newStatus } = req.params;
+
+    try {
+      const result = await issueRepository.updateStatus(issueId, newStatus);
+
+      if (result.nModified > 0) {
+        return res.status(200).json('Trạng thái được cập nhật thành công.');
+      }
+    } catch (error) {
+      return res.status(500).json('Trạng thái được cập nhật thành công.');
+    }
+  }
+
 export default {
     createIssue,
     updateIssue,
     deleteIssue,
     getIssuesByRoom,
+    getIssuesByRoom_,
+    update
 };
