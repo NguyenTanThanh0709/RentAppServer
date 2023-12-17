@@ -15,6 +15,8 @@ import commentReviewRouter from './commentReviewRouter.js'
 import issueRouter from './issueRouter.js'
 import billRouter from './billRouter.js'
 import leaseContractRouter from './leaseContractRouter.js'
+import findRoomHouseRouter from './findRoomHouseRouter.js'
+import timnguoioghep from './timNguoiOghepRouter.js'
 export {
     roomingHouseRouter,
     tenantRouter,
@@ -31,5 +33,7 @@ export {
     searchCriteriaRouter,
     issueRouter,
     billRouter,
-    leaseContractRouter
+    findRoomHouseRouter,
+    leaseContractRouter,
+    timnguoioghep
 }

@@ -19,7 +19,9 @@ import {
     searchCriteriaRouter,
     issueRouter,
     leaseContractRouter,
-    billRouter
+    billRouter,
+    findRoomHouseRouter,
+    timnguoioghep
 } from './routers/index.js'
 
 
@@ -47,7 +49,8 @@ app.use('/lichhen', viewingAppointmentRouter)
 app.use('/comment', commentReviewRouter)
 app.use('/issue', issueRouter)
 app.use('/leasecontract', leaseContractRouter)
-
+app.use('/findhouse', findRoomHouseRouter)
+app.use('/timnguoioghep', timnguoioghep)
 app.get('/', (req, res) =>{
     res.send('response from root router, haha 1111')
 })

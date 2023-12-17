@@ -8,9 +8,9 @@ export default mongoose.model('FavoritesRoom',
             ref: 'Tenant', // Reference to the 'Tenant' model
         },
         
-        room: [{
+        post: [{
             type: Schema.Types.ObjectId,
-            ref: 'RoomingHouse', // Reference to the 'RoomingHouse' model
+            ref: 'Post', // Reference to the 'RoomingHouse' model
             require:false
         }]
         

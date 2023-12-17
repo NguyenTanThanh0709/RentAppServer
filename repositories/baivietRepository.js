@@ -37,7 +37,9 @@ class baivietRepository {
                 model: 'AreaInformation',
               },
           ],
-          });
+          })
+          
+          ; 
         } catch (error) {
           throw error;
         }

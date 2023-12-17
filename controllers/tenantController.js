@@ -18,10 +18,7 @@ const login = async (req, res) => {
   const { email, password } = req.body;
   try {
     let existingUser = await tenantRepository.login({email, password})
-    res.status(HttpStatusCode.OK).json({
-      message: 'Login user successfully',
-      data: existingUser
-    })
+    res.status(HttpStatusCode.OK).json(existingUser)
   }catch(exception) {
     res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
       message: exception.toString(),      

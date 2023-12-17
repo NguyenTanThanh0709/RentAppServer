@@ -6,25 +6,7 @@ import { body, validationResult, param  } from 'express-validator';
 const router = express.Router();
 
 
-// Route: Create a new FavoritesRoom
-router.post('/', [
-    body('user').notEmpty().withMessage('User ID is required'),
-    body('room').isArray({ min: 1 }).withMessage('At least one room ID is required'),
-    // Add additional validation if needed
-  ], favouritesRoomController.createFavoritesRoom);
-  
-  // Route: Update FavoritesRoom by ID
-  router.put('/:id', [
-    param('id').isMongoId().withMessage('Invalid FavoritesRoom ID'),
-    body('user').optional().notEmpty().withMessage('User ID is required'),
-    body('room').optional().isArray({ min: 1 }).withMessage('At least one room ID is required'),
-    // Add additional validation if needed
-  ], favouritesRoomController.updateFavoritesRoom);
-  
-  // Route: Delete FavoritesRoom by ID
-  router.delete('/:id', [
-    param('id').isMongoId().withMessage('Invalid FavoritesRoom ID'),
-  ], favouritesRoomController.deleteFavoritesRoom);
+// Route: Create a new FavoritesRoo
   
   // Route: Get user favorites by UserID
   router.get('/user/:userId', [

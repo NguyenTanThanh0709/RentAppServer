@@ -13,6 +13,8 @@ import TypeHouse from "./TypeHouse.js"
 import ServiceCharge from "./serviceCharge.js"
 import areainformation from "./Areainformation.js"
 import Post_ from "./Post_.js"
+import FindRoomHouse from "./findRoomHouse.js";
+import FindTimNguoiOGhep from './findTimNguoiOGhep.js'
 export {
     RoomingHouse,
     TypeHouse,
@@ -28,5 +30,7 @@ export {
     Notification,
     Payment,
     ServiceCharge,
-    areainformation
+    areainformation,
+    FindRoomHouse,
+    FindTimNguoiOGhep
 }
