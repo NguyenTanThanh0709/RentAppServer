@@ -130,10 +130,7 @@ const getLeaseContractsByTenant = async (req, res) => {
   const { tenantId } = req.params;
   try {
     const leaseContracts = await leaseContractRepository.getByTenant(tenantId);
-    res.status(HttpStatusCode.OK).json({
-      message: 'Lease contracts retrieved successfully',
-      data: leaseContracts,
-    });
+    res.status(HttpStatusCode.OK).json(leaseContracts);
   } catch (exception) {
     res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
       message: exception.toString(),

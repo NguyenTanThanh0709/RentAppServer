@@ -19,5 +19,9 @@ export default mongoose.model('Bill',
             type: mongoose.Schema.Types.ObjectId,
             ref: 'LeaseContract', // Replace with the actual name of your RoomingHouse model
         },
+        status:{
+            type: Boolean,
+            default: false
+        }
     })
 );

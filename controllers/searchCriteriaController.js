@@ -11,10 +11,7 @@ const createSearchCriteria = async (req, res) => {
   const searchCriteriaData = req.body;
   try {
     const newSearchCriteria = await searchCriteriaRepository.create(searchCriteriaData);
-    res.status(HttpStatusCode.INSERT_OK).json({
-      message: 'SearchCriteria created successfully',
-      data: newSearchCriteria,
-    });
+    res.status(HttpStatusCode.INSERT_OK).json(newSearchCriteria);
   } catch (exception) {
     res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
       message: exception.toString(),
@@ -33,10 +30,7 @@ const updateSearchCriteria = async (req, res) => {
 
   try {
     const updatedSearchCriteria = await searchCriteriaRepository.update(id, searchCriteriaData);
-    res.status(HttpStatusCode.OK).json({
-      message: 'SearchCriteria updated successfully',
-      data: updatedSearchCriteria,
-    });
+    res.status(HttpStatusCode.OK).json(updatedSearchCriteria);
   } catch (exception) {
     res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
       message: exception.toString(),
@@ -49,10 +43,7 @@ const deleteSearchCriteria = async (req, res) => {
 
   try {
     const deletedSearchCriteria = await searchCriteriaRepository.delete(id);
-    res.status(HttpStatusCode.OK).json({
-      message: 'SearchCriteria deleted successfully',
-      data: deletedSearchCriteria,
-    });
+    res.status(HttpStatusCode.OK).json(deletedSearchCriteria);
   } catch (exception) {
     res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
       message: exception.toString(),
@@ -65,10 +56,7 @@ const getSearchCriteriaByTenantId = async (req, res) => {
 
   try {
     const searchCriteria = await searchCriteriaRepository.getByTenantId(tenantId);
-    res.status(HttpStatusCode.OK).json({
-      message: 'SearchCriteria retrieved successfully',
-      data: searchCriteria,
-    });
+    res.status(HttpStatusCode.OK).json(searchCriteria);
   } catch (exception) {
     res.status(HttpStatusCode.NOT_FOUND).json({
       message: exception.toString(),
@@ -82,10 +70,7 @@ const updateSearchCriteriaByTenantId = async (req, res) => {
 
   try {
     const updatedSearchCriteria = await searchCriteriaRepository.updateByTenantId(tenantId, searchCriteriaData);
-    res.status(HttpStatusCode.OK).json({
-      message: 'SearchCriteria updated successfully',
-      data: updatedSearchCriteria,
-    });
+    res.status(HttpStatusCode.OK).json(updatedSearchCriteria);
   } catch (exception) {
     res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
       message: exception.toString(),

@@ -53,20 +53,37 @@ class SearchCriteriaRepository {
   // Cập nhật thông tin SearchCriteria theo TenantId
   async updateByTenantId(tenantId, searchCriteriaData) {
     try {
-      const updatedSearchCriteria = await SearchCriteria.findOneAndUpdate(
-        { tenant: tenantId },
-        searchCriteriaData,
-        { new: true, runValidators: true }
-      )
-        .populate({
-          path: 'typehouse',
-          model: 'TypeHouse',
-        })
-        .populate({
-          path: 'amenities',
-          model: 'Amenities',
-        });
-      return updatedSearchCriteria;
+
+
+
+      let userFavorites = await SearchCriteria.findOne({ tenant: tenantId });
+          console.log(userFavorites)
+
+      
+          if (!userFavorites) {
+            // If FavoritesRoom doesn't exist, create a new one
+            const newSearchCriteria = new SearchCriteria(searchCriteriaData);
+          const savedSearchCriteria = await newSearchCriteria.save();
+          return savedSearchCriteria;
+          }else{
+            const updatedSearchCriteria = await SearchCriteria.findOneAndUpdate(
+              { tenant: tenantId },
+              searchCriteriaData,
+              { new: true, runValidators: true }
+            )
+              .populate({
+                path: 'typehouse',
+                model: 'TypeHouse',
+              })
+              .populate({
+                path: 'amenities',
+                model: 'Amenities',
+              });
+            return updatedSearchCriteria;
+          }
+
+
+      
     } catch (error) {
       throw error;
     }

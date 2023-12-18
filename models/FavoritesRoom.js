@@ -11,7 +11,8 @@ export default mongoose.model('FavoritesRoom',
         post: [{
             type: Schema.Types.ObjectId,
             ref: 'Post', // Reference to the 'RoomingHouse' model
-            require:false
+            require:false,
+            unique: true,
         }]
         
     })

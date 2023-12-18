@@ -74,17 +74,38 @@ class LeaseContractRepository {
     try {
       const leaseContracts = await LeaseContract.find({ tenant: tenantId })
       .populate({
-          path: 'tenant',
-         model: 'Tenant',
-  })
-  .populate({
-          path: 'landlord',
-         model: 'Landlord',
-  })
-  .populate({
-          path: 'roomingHouse',
-         model: 'RoomingHouse',
-  })
+        path: 'tenant',
+       model: 'Tenant',
+})
+.populate({
+        path: 'landlord',
+       model: 'Landlord',
+})
+.populate({
+        path: 'roomingHouse',       
+       model: 'RoomingHouse',
+       populate: [
+        {
+          path: 'amenities',
+        },
+        {
+          path: 'typehouse',
+      },{
+        path: 'owner',
+    },
+      {
+        path: 'address',
+    },
+        {
+          path: 'serviceCharge.serviceChargeId',
+          model: 'ServiceCharge',
+        },
+        {
+          path: 'areaInformation.areaInformationID',
+          model: 'AreaInformation',
+        },
+    ],
+})
       ;
       return leaseContracts;
     } catch (error) {
