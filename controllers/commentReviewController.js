@@ -77,10 +77,21 @@ const getCommentsByRoomingHouseId = async (req, res) => {
   try {
     const comments = await commentReviewRepository.getCommentsByRoomingHouseId(roomingHouseId);
 
-    res.status(HttpStatusCode.OK).json({
-      message: 'Comments retrieved successfully',
-      data: comments,
+    res.status(HttpStatusCode.OK).json(comments);
+  } catch (exception) {
+    res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
+      message: exception.toString(),
     });
+  }
+};
+
+const getCommentsByRoomingTenantId = async (req, res) => {
+  const { roomingHouseId } = req.params;
+
+  try {
+    const comments = await commentReviewRepository.getCommentsByRoomingtenant(roomingHouseId);
+
+    res.status(HttpStatusCode.OK).json(comments);
   } catch (exception) {
     res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
       message: exception.toString(),
@@ -93,4 +104,5 @@ export default {
   updateCommentReview,
   deleteCommentReview,
   getCommentsByRoomingHouseId,
+  getCommentsByRoomingTenantId
 };

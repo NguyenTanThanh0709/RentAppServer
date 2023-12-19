@@ -1,175 +1,293 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:background="#E6E5E5"
+    android:orientation="vertical"
+    tools:context=".Activity.CommentActivity">
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="#F0F3EF"
-        android:padding="10dp"
-        tools:context=".Activity.Tenant.HoaDon.InfoBillTenantActivity">
-
-
-        <androidx.cardview.widget.CardView
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:cardBackgroundColor="@android:color/transparent"
-            android:background="@drawable/rounded_corners">
+            android:orientation="vertical"
+            android:padding="5dp"
+            android:layout_height="match_parent">
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="8dp">
-                <TextView
+                android:padding="5dp"
+                android:background="#ffffff"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:id="@+id/comment_imagephongtro"
                     android:layout_width="match_parent"
-                    android:id="@+id/bill_tenant_chonhopdonglambill"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/baseline_warehouse_24"
-                    android:text="  Phòng trọ"
-                    android:textStyle="bold"
-                    android:textSize="18sp"/>
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/bill_tenant_id_hopdong"
+                    android:layout_height="150dp"
+                    android:src="@drawable/phongtro"
+                    android:scaleType="fitXY"
                     />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:cardBackgroundColor="@android:color/transparent"
-            android:background="@drawable/rounded_corners">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <TextView
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/comment_listimagephongtro_recycle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Hóa đơn tiền nhà tháng"
-                    android:textStyle="bold"
-                    android:textSize="18sp"/>
-
-                <!-- TextInputLayout with TextInputEditText -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/bill_tenant_textinputday_ngaythanhtoan"
-                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
                     android:layout_height="wrap_content">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/bill_tenant_editTextday_ngaythanhtoan"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="none"
-                        android:hint="Hóa đơn tháng"
-                        android:focusable="false"
-                        android:onClick="showDatePickerDialog" />
-                </com.google.android.material.textfield.TextInputLayout>
+                </androidx.recyclerview.widget.RecyclerView>
+                <TextView
+                    android:id="@+id/comment_loaiphongtro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="italic"
+                    android:textColor="#bbbbbb"
+                    android:text="chung cư Mini, (Nam and Nữ)"/>
+                <TextView
+                    android:id="@+id/comment_tieudebaidang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    android:textSize="20sp"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="#000000"
+                    android:text="Địa chỉ phòng trọ"/>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="31dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/comment_giatro"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:padding="5dp"
+                        android:text="1000000 triệu/tháng"
+                        android:textColor="#ffa500"
+                        android:textStyle="italic" />
+
+                    <ImageView
+                        android:id="@+id/comment_heart"
+                        android:layout_width="0dp"
+                        android:layout_height="22dp"
+                        android:layout_marginEnd="18dp"
+                        android:layout_marginBottom="128dp"
+                        android:layout_weight="2"
+                        android:src="@drawable/bookmark" />
+                </LinearLayout>
 
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:cardBackgroundColor="@android:color/transparent"
-            android:background="@drawable/rounded_corners">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="8dp">
-
-                <TextView
+                android:layout_marginTop="10dp"
+                android:background="#ffffff"
+                android:padding="5dp"
+                android:layout_height="match_parent">
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="  Phí dịch vụ"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="10dp"
-                    android:drawableLeft="@drawable/baseline_diversity_2_24"
-                    android:textSize="18sp"/>
+                    android:layout_height="1dp"
+
+                    android:background="#CCCCCC" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#CCCCCC" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="4"
-                    android:padding="8dp">
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="0dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Tiền phòng:" />
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:id="@+id/bill_tenant_kihan_hd"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="kì hạn: 2" />
+                        <!-- First Item -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_margin="4dp"
+                            android:layout_gravity="center_vertical"
+                            android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/bill_tenant_gia_hd"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Giá: 21" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="Diện tích (m^2)" />
 
-                    <TextView
-                        android:id="@+id/bill_tenant_tong_price_hd"
-                        android:layout_width="0dp"
+                            <TextView
+                                android:id="@+id/comment_dientichphong_baidanginfo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:textColor="#ffa500"
+                                android:text="30" />
+                        </LinearLayout>
+
+       
+                        <!-- Third Item -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_margin="4dp"
+                            android:layout_gravity="center_vertical"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="Số người" />
+
+                            <TextView
+                                android:id="@+id/comment_songuoi_baidanginfo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:textColor="#ffa500"
+                                android:text="2" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="10dp"
+                        android:background="#CCCCCC" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Tổng: 21" />
+                        android:padding="10dp"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:layout_weight="4"
+                            android:background="@drawable/bottom_border"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="-5dp"
+                                android:src="@drawable/issue" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginLeft="10dp"
+                                android:textSize="18sp"
+                                android:text="Quy tắc phòng trọ"/>
+                        </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:padding="10dp"
+                            android:id="@+id/comment_quytac_baidanginfo_recycleview"/>
+                    </LinearLayout>
+
+
+
+
                 </LinearLayout>
 
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:id="@+id/bill_tenant_phidichvu"/>
-
-                <TextView
-                    android:id="@+id/bill_tenant_tongtien_bill"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Tổng: 1.000.000"/>
-
-                <TextView
-                    android:id="@+id/bill_tenant_textView_mota_bill"
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:hint="Mô tả" />
-
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
 
-        <Button
-            android:id="@+id/bill_tenant_buttonAddBill"
-            android:layout_width="match_parent"
-            android:layout_margin="10dp"
-            android:layout_height="wrap_content"
-            android:text="Thanh Toán"/>
-    </LinearLayout>
-</ScrollView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:background="#ffffff"
+                android:padding="5dp"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="3"
+                        android:layout_marginTop="-5dp"
+                        android:src="@drawable/profile" />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="7"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/comment_tenchutro"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:text="Nguyễn Tấn Thành"
+                            android:textColor="#ffa500"
+                            android:textStyle="italic" />
+                        <TextView
+                            android:id="@+id/comment_sdt_baidanginfo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:text="21 Bài đăng"
+                            android:textColor="#ffa500"
+                            android:textStyle="italic" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+
+                    android:background="#CCCCCC" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#CCCCCC" />
+ 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:background="#ffffff"
+                android:padding="5dp"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:text="Danh sách Comment"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/comment_listcomment_recycleview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </androidx.recyclerview.widget.RecyclerView>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+    
+</LinearLayout>

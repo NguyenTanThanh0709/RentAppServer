@@ -29,4 +29,9 @@ router.get('/roomingHouse/:roomingHouseId', [
   param('roomingHouseId').isMongoId().withMessage('Invalid RoomingHouse ID'),
 ], commentReviewController.getCommentsByRoomingHouseId);
 
+router.get('/tenant/:roomingHouseId', [
+  param('roomingHouseId').isMongoId().withMessage('Invalid RoomingHouse ID'),
+], commentReviewController.getCommentsByRoomingTenantId);
+
+
 export default router;

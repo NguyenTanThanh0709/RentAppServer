@@ -99,10 +99,7 @@ const getViewingAppointmentsByRoomingHouseId = async (req, res) => {
   try {
     const viewingAppointments = await viewingAppointmentRepository.getByRoomingHouseId(roomingHouseId);
 
-    res.status(HttpStatusCode.OK).json({
-      message: 'ViewingAppointments found successfully',
-      data: viewingAppointments,
-    });
+    res.status(HttpStatusCode.OK).json(viewingAppointments);
   } catch (exception) {
     res.status(HttpStatusCode.NOT_FOUND).json({
       message: exception.toString(),

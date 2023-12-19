@@ -60,6 +60,28 @@ class ViewingAppointmentRepository {
       .populate({
         path: 'roomingHouse',  // Populate the roomingHouse field
         model: 'RoomingHouse', // Model to populate
+        populate: [
+          {
+              path: 'amenities',
+          },
+          {
+              path: 'typehouse',
+          },
+          {
+              path: 'owner',
+          },
+          {
+              path: 'address',
+          },
+          {
+              path: 'serviceCharge.serviceChargeId',
+              model: 'ServiceCharge',
+          },
+          {
+              path: 'areaInformation.areaInformationID',
+              model: 'AreaInformation',
+          },
+      ],
       });
       return viewingAppointments;
     } catch (error) {
