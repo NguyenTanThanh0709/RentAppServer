@@ -2,10 +2,6 @@ import mongoose, {Schema, ObjectId } from 'mongoose'
 export default mongoose.model('Notification',
     new Schema({
         id: { type: ObjectId},
-        title: {
-            type: String,
-            required: true,
-        },
         description: {
             type: String,
             required: true,
@@ -22,7 +18,17 @@ export default mongoose.model('Notification',
         },
         date: {
             type: Date,
-            required: true,
+            required: false,
+            default: Date.now,
+        },
+        type: {
+            type: String,
+            required: false,
+            enum: ['TIN NHẮN', 'SỰ CỐ', 'HÓA ĐƠN', 'LỊCH HẸN', 'TIÊU CHÍ PHÙ HỢP'],
+        },
+        id_type: {
+            type: String,
+            required: false,
         },
     })
 )

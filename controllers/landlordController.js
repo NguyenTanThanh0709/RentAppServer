@@ -59,9 +59,32 @@ const register = async (req, res) => {
   }
   
   }
+
+
+  const getById = async (req, res) => {
+    const tenantId = req.params.id;
+    console.log(tenantId);
+  
+    try {
+      const tenant = await landlordRepository.getById(tenantId);
+      if (tenant) {
+        console.log(tenant);
+        res.status(HttpStatusCode.OK).json(tenant);
+      } else {
+        res.status(HttpStatusCode.NOT_FOUND).json({
+          message: 'Tenant not found',
+        });
+      }
+    } catch (exception) {
+      res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
+        message: exception.toString(),
+      });
+    }
+  };
   
   //many other functions...
   export default {
     login,
     register,
+    getById
   }

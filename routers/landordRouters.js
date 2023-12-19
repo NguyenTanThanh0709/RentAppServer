@@ -13,4 +13,6 @@ router.post('/register', landlordController.register)
 router.get('/common', (req, res) => {
     res.send('Hello, World!');
 });
+
+router.get('/getById/:id', landlordController.getById);
 export default router

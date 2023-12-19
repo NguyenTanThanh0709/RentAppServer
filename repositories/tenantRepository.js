@@ -51,6 +51,17 @@ const login = async ({email, password}) => {
 }
 
 
+const getById = async (tenantId) => {
+  try {
+    // Find the tenant by ID
+    const tenant = await Tenant.findById(tenantId);
+    return tenant;
+  } catch (error) {
+    throw error;
+  }
+}
+
+
 
 const register = async ({
     name,
@@ -88,5 +99,6 @@ const register = async ({
 export default {
     login, 
     register,
+    getById,
     findByPhoneAndPass
 }

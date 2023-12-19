@@ -9,4 +9,5 @@ router.post('/login',
     tenantController.login
 )
 router.post('/register', tenantController.register)
+router.get('/getById/:id', tenantController.getById);
 export default router
