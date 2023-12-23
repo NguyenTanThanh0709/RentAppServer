@@ -1,8 +1,19 @@
 import Post_ from "../models/Post_.js"
 
+function parseDateString(dateString) {
+  const [day, month, year] = dateString.split('/').map(Number);
+  return new Date(year, month - 1, day); // Note: Month is zero-based in JavaScript dates
+}
+
 class baivietRepository {
+
+  
+
     async createPost(postData) {
+
+
         try {
+          postData.day_up = parseDateString(postData.day_up);
           const post = new Post_(postData);
           return await post.save();
         } catch (error) {
@@ -80,6 +91,7 @@ class baivietRepository {
     
     async updatePost(postId, newData) {
         try {
+          newData.day_up = parseDateString(newData.day_up);
           return await Post_.findByIdAndUpdate(postId, newData, { new: true })
           .populate({
             path: 'room',

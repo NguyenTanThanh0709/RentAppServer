@@ -39,9 +39,7 @@ class TimNguoiOGhepRepository {
       .populate({
         path: 'amenities',
       })
-      .populate({
-        path: 'typehouse',
-      })
+
       .populate({
         path: 'serviceCharge.serviceChargeId',
          model: 'ServiceCharge',
@@ -65,9 +63,6 @@ class TimNguoiOGhepRepository {
         path: 'amenities',
       })
       .populate({
-        path: 'typehouse',
-      })
-      .populate({
         path: 'serviceCharge.serviceChargeId',
          model: 'ServiceCharge',
       })
@@ -88,9 +83,6 @@ class TimNguoiOGhepRepository {
       const timNguoiOGhepsByUser = await FindTimNguoiOGhep.find({ user: userId })
       .populate({
         path: 'amenities',
-      })
-      .populate({
-        path: 'typehouse',
       })
       .populate({
         path: 'serviceCharge.serviceChargeId',

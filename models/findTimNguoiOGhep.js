@@ -52,12 +52,6 @@ new Schema({
         ref: 'Amenities',
     }],
 
-    typehouse: {
-        type: Schema.Types.ObjectId,
-        ref: 'TypeHouse',
-        required: true, // Add this line if it's a required field
-      },
-
       address: {
         type: addressSchema,
         required: true,
