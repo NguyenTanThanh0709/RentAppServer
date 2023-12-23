@@ -21,9 +21,6 @@ class RoomingHouseRepository {
   async create(roomingHouseData) {
     try {
       const { roominghousecomplex} = roomingHouseData;
-
-      console.log(roomingHouseData);
-      console.log(roominghousecomplex)
       let savedRoomingHouse;
 
       if (roominghousecomplex) {

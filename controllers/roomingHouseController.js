@@ -38,8 +38,8 @@ async function addPhongTro(req, res) {
   }
 
   try {
+    console.log(req.body);
       const newRoomingHouse = await RoomingHouseRepository.create(req.body);
-      console.log(newRoomingHouse);
       res.status(201).json({
         message: 'Rooming house created successfully',
         data: newRoomingHouse,

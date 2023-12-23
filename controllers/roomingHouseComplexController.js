@@ -119,11 +119,35 @@ const deleteRoomingHouseFromComplex = async (req, res) => {
     }
   }
 
+  const updateRoomingHouseComplex = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(HttpStatusCode.BAD_REQUEST).json({ errors: errors.array() });
+    }
+  
+    const { roomingHouseComplexId } = req.params;
+    const roomingHouseComplexData = req.body;
+  
+    try {
+      const updatedRoomingHouseComplex = await RoomingHouseComplexRepository.update(roomingHouseComplexId, roomingHouseComplexData);
+  
+      if (!updatedRoomingHouseComplex) {
+        return res.status(HttpStatusCode.NOT_FOUND).json({ message: 'RoomingHouseComplex not found' });
+      }
+  
+      return res.status(HttpStatusCode.OK).json(updatedRoomingHouseComplex);
+    } catch (error) {
+      console.error(error);
+      return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ message: 'Internal Server Error' });
+    }
+  };
+
 export default {
   addRoomingHouseComplex,
   getRoomingHouseComplexById,
   getRoomingHouseComplexList,
   deleteRoomingHouseFromComplex,
   deleteRoomingHouseComplexById,
-  getByOwnerId
+  getByOwnerId,
+  updateRoomingHouseComplex
 };

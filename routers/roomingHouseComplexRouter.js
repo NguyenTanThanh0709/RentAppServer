@@ -6,6 +6,9 @@ const router = express.Router();
 
 // Add RoomingHouseComplex
 router.post('/', roomingHouseComplexController.addRoomingHouseComplex);
+// Update RoomingHouseComplex by ID
+router.put('/:roomingHouseComplexId', roomingHouseComplexController.updateRoomingHouseComplex);
+
 
 // Get RoomingHouseComplex by ID
 router.get('/:roomingHouseComplexId', roomingHouseComplexController.getRoomingHouseComplexById);
