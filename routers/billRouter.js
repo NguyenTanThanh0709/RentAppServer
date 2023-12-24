@@ -9,9 +9,9 @@ router.post(
   '/add',
   [
     body('amount').isNumeric().withMessage('Amount must be a number'),
-    body('payment_date').isISO8601().toDate().withMessage('Invalid date format'),
-    body('description').optional().isString(),
+    body('payment_date').optional().isString(),
     body('leaseContract').isMongoId().withMessage('Invalid leaseContract ID'),
+    body('status').isBoolean().withMessage('Status must be a boolean')
     // You might want to add validation for serviceCharge here
   ],
   billController.addBill
@@ -22,9 +22,10 @@ router.put(
   '/update/:billId',
   [
     body('amount').isNumeric().withMessage('Amount must be a number'),
-    body('payment_date').isISO8601().toDate().withMessage('Invalid date format'),
+    body('payment_date').optional().isString(),
     body('description').optional().isString(),
     body('leaseContract').isMongoId().withMessage('Invalid leaseContract ID'),
+    body('status').isBoolean().withMessage('Status must be a boolean')
     // You might want to add validation for serviceCharge here
   ],
   billController.updateBill

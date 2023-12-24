@@ -8,7 +8,7 @@ export default mongoose.model('Bill',
             required: true
         },
         payment_date: {
-            type: Date,
+            type: String,
             required: true
         },
         description: {

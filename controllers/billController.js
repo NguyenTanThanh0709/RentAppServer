@@ -8,20 +8,13 @@ const addBill = async (req, res) => {
       return res.status(HttpStatusCode.BAD_REQUEST).json({ errors: errors.array() });
     }
   
-    const { amount, payment_date, description, leaseContract, serviceCharge } = req.body;
+    const { amount, payment_date, description, leaseContract, status } = req.body;
   
     try {
-      const newBill = await billRepository.addBill({
-        amount,
-        payment_date,
-        description,
-        leaseContract,
-        serviceCharge,
-      });
-  
+      const newBill = await billRepository.addBill(req.body);
+      
       res.status(HttpStatusCode.INSERT_OK).json({
-        message: 'Bill added successfully',
-        data: newBill,
+        message: newBill._id
       });
     } catch (exception) {
       res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
@@ -37,7 +30,7 @@ const updateBill = async (req, res) => {
     }
 
     const { billId } = req.params;
-    const { amount, payment_date, description, leaseContract, serviceCharge } = req.body;
+    const { amount, payment_date, description, leaseContract, status } = req.body;
 
     try {
       const updatedBill = await billRepository.updateBill(billId, {
@@ -45,12 +38,12 @@ const updateBill = async (req, res) => {
         payment_date,
         description,
         leaseContract,
-        serviceCharge,
+        status,
       });
 
       res.status(HttpStatusCode.OK).json({
-        message: 'Bill updated successfully',
-        data: updatedBill,
+        message: updatedBill._id
+       
       });
     } catch (exception) {
       res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
