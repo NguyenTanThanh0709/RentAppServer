@@ -19,6 +19,7 @@ router.delete('/:id', searchCriteriaController.deleteSearchCriteria);
 
 // Get SearchCriteria by Tenant ID
 router.get('/tenant/:tenantId', searchCriteriaController.getSearchCriteriaByTenantId);
+router.get('/getall', searchCriteriaController.findAll);
 
 // Update SearchCriteria by Tenant ID
 router.put('/tenant/:tenantId', [

@@ -89,6 +89,23 @@ class SearchCriteriaRepository {
     }
   }
 
+  async findAll() {
+    try {
+      const allSearchCriteria = await SearchCriteria.find()
+        .populate({
+          path: 'typehouse',
+          model: 'TypeHouse',
+        })
+        .populate({
+          path: 'amenities',
+          model: 'Amenities',
+        });
+      return allSearchCriteria;
+    } catch (error) {
+      throw error;
+    }
+  }
+
 }
 
 export default new SearchCriteriaRepository();

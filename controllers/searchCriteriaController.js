@@ -64,6 +64,20 @@ const getSearchCriteriaByTenantId = async (req, res) => {
   }
 };
 
+
+const findAll = async (req, res) => {
+ 
+
+  try {
+    const searchCriteria = await searchCriteriaRepository.findAll(tenantId);
+    res.status(HttpStatusCode.OK).json(searchCriteria);
+  } catch (exception) {
+    res.status(HttpStatusCode.NOT_FOUND).json({
+      message: exception.toString(),
+    });
+  }
+};
+
 const updateSearchCriteriaByTenantId = async (req, res) => {
   const { tenantId } = req.params;
   const searchCriteriaData = req.body;
@@ -84,4 +98,5 @@ export default {
   deleteSearchCriteria,
   getSearchCriteriaByTenantId,
   updateSearchCriteriaByTenantId,
+  findAll
 };
