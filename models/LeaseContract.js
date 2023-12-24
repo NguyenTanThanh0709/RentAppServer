@@ -22,19 +22,19 @@ export default mongoose.model('LeaseContract',
         },
 
         create_date: {
-            type: Date,
+            type: String,
             required: true,
         },
         start_date: {
-            type: Date,
+            type: String,
             required: true,
         },
         end_date: {
-            type: Date,
+            type: String,
             required: true,
         },
         billing_start_date: {
-            type: Date,
+            type: String,
             required: true,
         },
         

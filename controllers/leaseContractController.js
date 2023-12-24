@@ -5,16 +5,15 @@ import tenantRepository from '../repositories/tenantRepository.js';
 import { RoomingHouseRepository } from '../repositories/index.js';
 
 const addLeaseContract = async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(HttpStatusCode.BAD_REQUEST).json({ errors: errors.array() });
-  }
-
-  const leaseContractData = req.body;
-
-
   try {
-    const roomingHouseId = leaseContractData.roomingHouse; // Adjust the way you get the roomingHouseId based on your route setup
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(HttpStatusCode.BAD_REQUEST).json({ errors: errors.array() });
+    }
+
+    const leaseContractData = req.body;
+
+    const roomingHouseId = leaseContractData.roomingHouse;
 
     const leaseContracts = await leaseContractRepository.getByRoomingHouse(roomingHouseId);
     const hasLeaseContractWithStatusTrue = leaseContracts.some(leaseContract => leaseContract.status === true);
@@ -25,105 +24,106 @@ const addLeaseContract = async (req, res) => {
       });
     }
 
-    res.json(leaseContracts);
-  } catch (error) {
-    // Handle errors, e.g., send an error response
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
+    // Lấy dữ liệu từ tenant_phone và password
+    const phoneNumber = leaseContractData.tenant_phone;
+    const password = leaseContractData.password;
+    const sanitizedData = { ...leaseContractData };
+    delete sanitizedData.tenant_phone;
+    delete sanitizedData.password;
 
-
-
-  // Lấy dữ liệu từ tenant_phone và password
-  const phoneNumber = leaseContractData.tenant_phone;
-  const password = leaseContractData.password;
-  const sanitizedData = { ...leaseContractData };
-  delete sanitizedData.tenant_phone;
-  delete sanitizedData.password;
-
-
-
-  try {
     const foundTenant = await tenantRepository.findByPhoneAndPass(phoneNumber, password);
-  
+
     if (foundTenant) {
       // Tenant found, proceed with your logic
       const convertedString = foundTenant._id.toString();
       sanitizedData.tenant = convertedString;
       console.log(sanitizedData);
-      try {
-        const newLeaseContract = await leaseContractRepository.add(sanitizedData);
 
-
-        try {
-          const updatedRoomingHouse = await RoomingHouseRepository.updateStatusAndAvailableDates(
-            leaseContractData.roomingHouse,
-            "RENTED",
-            leaseContractData.end_date
-          );
-        
-          
-        } catch (error) {
-
-        }
-
-        res.status(HttpStatusCode.INSERT_OK).json({
-          message: 'Lease contract added successfully',
-          data: newLeaseContract,
-        });
-      } catch (exception) {
-        res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
-          message: exception.toString(),
-        });
+      const newLeaseContract = await leaseContractRepository.add(sanitizedData);
+      if(newLeaseContract){
+        const updatedRoomingHouse = await RoomingHouseRepository.updateStatusAndAvailableDates(
+          leaseContractData.roomingHouse,
+          "RENTED",
+          leaseContractData.end_date
+        );
       }
 
+      
+
+      res.status(HttpStatusCode.INSERT_OK).json({
+        message: 'Lease contract added successfully'
+      });
     } else {
       console.log('Invalid phone number or password');
-      res.status(HttpStatusCode.NOT_FOUND).json({
+      return res.status(HttpStatusCode.NOT_FOUND).json({
         message: 'Invalid phone number or password',
       });
     }
   } catch (error) {
-    res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
-      message: 'Error checking tenant',
+    console.error(error);
+
+    // Handle errors and send an appropriate response
+    return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
+      message: 'Internal Server Error',
     });
   }
-
 };
 
 const updateLeaseContract = async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(HttpStatusCode.BAD_REQUEST).json({ errors: errors.array() });
-  }
-
-  const { id } = req.params;
-
-  const { tenant_phone, password, ...leaseContractData } = req.body;
-  const foundTenant = await tenantRepository.findByPhoneAndPass(tenant_phone, password);
-
-
-
   try {
-    if(foundTenant){
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(HttpStatusCode.BAD_REQUEST).json({ errors: errors.array() });
+    }
+
+    const leaseContractData = req.body;
+    const { id } = req.params;
+    const roomingHouseId = leaseContractData.roomingHouse;
+
+    // Lấy dữ liệu từ tenant_phone và password
+    const phoneNumber = leaseContractData.tenant_phone;
+    const password = leaseContractData.password;
+    const sanitizedData = { ...leaseContractData };
+    delete sanitizedData.tenant_phone;
+    delete sanitizedData.password;
+
+    const foundTenant = await tenantRepository.findByPhoneAndPass(phoneNumber, password);
+
+    if (foundTenant) {
+      // Tenant found, proceed with your logic
       const convertedString = foundTenant._id.toString();
-      leaseContractData.tenant = convertedString;
-      const updatedLeaseContract = await leaseContractRepository.update(id, leaseContractData);
-      res.status(HttpStatusCode.OK).json({
-        message: 'Lease contract updated successfully',
-        data: updatedLeaseContract,
+      sanitizedData.tenant = convertedString;
+      console.log(sanitizedData);
+
+      const newLeaseContract = await leaseContractRepository.update(id,sanitizedData);
+      if(newLeaseContract){
+        const updatedRoomingHouse = await RoomingHouseRepository.updateStatusAndAvailableDates(
+          leaseContractData.roomingHouse,
+          "RENTED",
+          leaseContractData.end_date
+        );
+      }
+
+      
+
+      res.status(HttpStatusCode.INSERT_OK).json({
+        message: 'Lease contract update successfully'
       });
-    }else{
+    } else {
       console.log('Invalid phone number or password');
-      res.status(HttpStatusCode.NOT_FOUND).json({
+      return res.status(HttpStatusCode.NOT_FOUND).json({
         message: 'Invalid phone number or password',
       });
     }
-    
-  } catch (exception) {
-    res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
-      message: exception.toString(),
+  } catch (error) {
+    console.error(error);
+
+    // Handle errors and send an appropriate response
+    return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
+      message: 'Internal Server Error',
     });
   }
+
 };
 
 const getLeaseContractsByTenant = async (req, res) => {

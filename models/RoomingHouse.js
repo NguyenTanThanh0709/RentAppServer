@@ -47,7 +47,7 @@ export default mongoose.model('RoomingHouse',
         },
 
         available_dates: {
-            type: Date,
+            type: String,
             required: true // For example, you can make it a required field
         },
         roominghousecomplex: {
