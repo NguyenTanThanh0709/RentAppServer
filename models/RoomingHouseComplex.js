@@ -1,4 +1,4 @@
-import mongoose, {Schema, ObjectId } from 'mongoose'
+  import mongoose, {Schema, ObjectId } from 'mongoose'
 // import roomingHouse from './RoomingHouse.js'
 import addressSchema from './addressSchema.js';
 

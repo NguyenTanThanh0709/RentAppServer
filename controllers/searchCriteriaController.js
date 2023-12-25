@@ -69,7 +69,7 @@ const findAll = async (req, res) => {
  
 
   try {
-    const searchCriteria = await searchCriteriaRepository.findAll(tenantId);
+    const searchCriteria = await searchCriteriaRepository.findAll();
     res.status(HttpStatusCode.OK).json(searchCriteria);
   } catch (exception) {
     res.status(HttpStatusCode.NOT_FOUND).json({

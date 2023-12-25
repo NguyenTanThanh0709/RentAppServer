@@ -9,17 +9,47 @@ class baivietRepository {
 
   
 
-    async createPost(postData) {
-
-
-        try {
-          postData.day_up = parseDateString(postData.day_up);
-          const post = new Post_(postData);
-          return await post.save();
-        } catch (error) {
-          throw error;
-        }
-      }
+  async createPost(postData) {
+    try {
+      postData.day_up = parseDateString(postData.day_up);
+      const post = new Post_(postData);
+      const savedPost = await post.save();
+  
+      // Use the populated function to fetch the post with related data
+      const populatedPost = await Post_.findById(savedPost._id)
+        .populate({
+          path: 'room',
+          model: 'RoomingHouse',
+          populate: [
+            {
+              path: 'amenities',
+            },
+            {
+              path: 'typehouse',
+            },
+            {
+              path: 'owner',
+            },
+            {
+              path: 'address',
+            },
+            {
+              path: 'serviceCharge.serviceChargeId',
+              model: 'ServiceCharge',
+            },
+            {
+              path: 'areaInformation.areaInformationID',
+              model: 'AreaInformation',
+            },
+          ],
+        });
+  
+      return populatedPost;
+    } catch (error) {
+      throw error;
+    }
+  }
+  
     
     async getAllPosts() {
         try {
